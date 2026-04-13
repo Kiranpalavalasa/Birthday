@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>For Sheetal 🎂</title>
+
+<style>
+body {
+  margin: 0;
+  font-family: "Segoe UI", sans-serif;
+  text-align: center;
+  overflow: hidden;
+  color: white;
+  background: black;
+  min-height: 100vh;
+}
+
+/* ✨ sparkles */
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 200%;
+  height: 200%;
+  background-image: radial-gradient(white 1px, transparent 1px);
+  background-size: 50px 50px;
+  opacity: 0.25;
+  animation: sparkleMove 20s linear infinite;
+  z-index: -1;
+}
+
+@keyframes sparkleMove {
+  from { transform: translate(0,0); }
+  to { transform: translate(-100px,-200px); }
+}
+
+/* screens */
+.screen {
+  display: none;
+  height: 100vh;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  padding: 20px;
+}
+
+.active {
+  display: flex;
+}
+
+/* buttons */
+button {
+  padding: 12px 22px;
+  margin: 10px;
+  font-size: 16px;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+  background: #ff8fab;
+  color: white;
+}
+
+#noBtn {
+  position: absolute;
+}
+
+/* cake */
+.cake {
+  font-size: 90px;
+  cursor: pointer;
+  margin-top: 20px;
+}
+
+.flame {
+  font-size: 28px;
+  display: inline-block;
+  animation: flicker 0.2s infinite;
+}
+
+@keyframes flicker {
+  0% { opacity: 1; }
+  50% { opacity: 0.4; }
+  100% { opacity: 1; }
+}
+
+img {
+  width: 170px;
+  margin-top: 15px;
+  border-radius: 12px;
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- SCREEN 1 -->
+<div id="s1" class="screen active">
+  <h2>Hey Sheetal… Texas odham ankuna kani evadra nuv ani antav emo ani ila plan chesa...ni kosam😂🎁<br><br>Don't Laugh</h2>
+  <button onclick="next('s2')">open it</button>
+</div>
+
+<!-- SCREEN 2 -->
+<div id="s2" class="screen">
+  <h2>Ready for something cute?💐,<br>konchem too much aindhi..kani parledhu</h2>
+  <button onclick="next('s3')">yes 😌</button>
+  <button id="noBtn">no 😏</button>
+</div>
+
+<!-- SCREEN 3 -->
+<div id="s3" class="screen">
+  <h2>Happy Birthday, Sheetal 💗</h2>
+
+  <div class="cake" onclick="blow()">
+    🎂
+    <div>
+      <span class="flame" id="f1">🕯️</span>
+      <span class="flame" id="f2">🕯️</span>
+      <span class="flame" id="f3">🕯️</span>
+    </div>
+  </div>
+
+  <p>blow the candles… or tap👀</p>
+
+  <!-- sticker 1 -->
+  <img id="st1"
+       src="https://media.giphy.com/media/MDJ9IbxxvDUQM/giphy.gif"
+       style="display:none;">
+</div>
+
+<!-- SCREEN 4 -->
+<div id="s4" class="screen">
+  <h2>✨ To the prettiest Sheetal 💗</h2>
+
+  <img src="https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExcTlqNDU0Zms5cTZwMzZ5MGV2MTFjYTVhanc3dTM2MHMxZTMwamg4dyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/KoreOHLvWq5rklEA8Z/giphy.gif">
+
+  <p>ni birthday ki invite cheyalev andhuke clebrating you this way...
+     <br><br>Okay but Seriously…<br>You make this world a little brighter just by being in it...<br><br>
+    I hope today is as sweet as you are 💗
+  </p>
+
+  <p>
+    I don’t know you fully yet…<br>
+    but I’d like to change that 🫣
+    ....<br><br>
+    maybe next year I’ll get to celebrate with you in person.
+  </p>
+
+  <p><i>Enjoy your day 💫 Happy Birthday once again🎉🎉🎉🎉🎉🎉🍾🍾 </i></p>
+
+
+</div>
+
+<script>
+
+/* screen switch */
+function next(id){
+  document.querySelectorAll(".screen").forEach(s => s.classList.remove("active"));
+  document.getElementById(id).classList.add("active");
+
+  if(id === "s3"){
+    setTimeout(()=>{
+      document.getElementById("st1").style.display = "block";
+    }, 500);
+  }
+
+  if(id === "s4"){
+    setTimeout(()=>{
+      document.getElementById("st2").style.display = "block";
+    }, 500);
+  }
+}
+
+/* runaway button */
+const noBtn = document.getElementById("noBtn");
+
+document.addEventListener("mousemove", (e)=>{
+  if(!noBtn) return;
+
+  const r = noBtn.getBoundingClientRect();
+  const d = Math.hypot(e.clientX - r.x, e.clientY - r.y);
+
+  if(d < 90){
+    noBtn.style.top = Math.random()*window.innerHeight + "px";
+    noBtn.style.left = Math.random()*window.innerWidth + "px";
+  }
+});
+
+/* candle blow */
+function blow(){
+  const flames = [f1,f2,f3];
+
+  flames.forEach((f,i)=>{
+    setTimeout(()=>{
+      f.style.opacity = "0.2";
+      f.style.transform = "translateY(-5px)";
+    }, i*250);
+  });
+
+  setTimeout(()=>{
+    next("s4");
+  }, 1200);
+}
+
+</script>
+
+</body>
+</html>
